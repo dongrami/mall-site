@@ -17,11 +17,16 @@
   <script src="/__/firebase/init.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+  <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
 </head>
 
 
 <body>
+  <div class="loader">
+    <div>
+      <span class="fa fa-spinner fa fa-spin"></span>
+    </div>
+  </div>
   <header class="clear">
     <div class="wrap">
       <ul class="hd_lt">
@@ -112,7 +117,7 @@
   </section>
   <section class="banners wrap">
     <div class="cates wrap clear">
-      <ul class="cate"></ul>
+      <ul class="cate"> </ul>
       <ul class="banner clear">
         <li>
           <div class="ban_img"><img src="../img/drone3.jpg" class="ban_img"></div>

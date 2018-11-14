@@ -1,6 +1,14 @@
 .wrap{max-width:1200px; margin:0 auto;}
 .txt-blue{color:#4064b1;}
 
+/******* image loader ********/
+.loader{width:100%; height:100%; background-color:rgba(0,0,0,0.4); display:table; position: absolute;}
+.loader > div{display:table-cell; text-align:center; vertical-align:middle; font-size:5rem; color:#fff; z-index:99999;}
+
+
+
+
+
 /******HEADER*********/
 header{background-color:#4064b1; font-size:12px;}
 header > div{width:100%;}
@@ -46,13 +54,13 @@ position: absolute; top:0; right:-0.5em;}
 .navs > .cate_top > :first-child{font-size:1.25em; margin-right:0.3em;}
 .navs > .cate_top > :last-child{float:right;}
 .navs > .menu{width:calc(100% - 540px);}
-.navs > .menu > ul > li{float:left; margin-left:1.5em; position: relative;}
+.navs > .menu > ul > li{float:left; margin-left:1.5em; position: relative; cursor: pointer;}
 .navs > .menu > ul > li:nth-child(1), .navs > .menu > ul > li:nth-child(2){position: static !important;}
 .navs > .menu > ul > li .arrow_down{color:#ccc; padding-left:0.2rem;}
 .navs > .etc {width:270px; text-align:right;}
 .navs > .etc > span{cursor: pointer;}
 .navs > .etc > :nth-child(2) {padding:0 0.5em;}
-.menu_modal{background-color:#fff; top:51px; left: 0; position:absolute !important; width:100%;display:none; padding:2em 0; border-bottom: 1px solid#999;}
+.menu_modal{background-color:#fff; top:51px; left: 0; position:absolute !important; width:100%;display:none; padding:2em 0; border-bottom: 1px solid#999; z-index:11111;}
 #modal0 > ul {width:20%; padding:2%; float:left; cursor: pointer;}
 #modal0 > ul > :first-child{box-sizing: 0 1px 3px rgba(0,0,0,0.3); }
 #modal0 > ul > :nth-child(2){margin-top:1em; text-align: center; color:#333; font-weight:400;}
@@ -65,7 +73,7 @@ position: absolute; top:0; right:-0.5em;}
 .title a{font-weight:540; color:#222;}
 .title a:hover{color:#4064b1; font-weight:600;}
 .cont a{color: #777; font-size:0.9em;}
-.cont a:hover{color: #333;}
+.cont a:hover{color: #222; font-weight: 600;}
 #modal2, #modal3, #modal4{width:800px;}
 #modal2 > ul {float:left;}
 #modal2 > ul .title, #modal2 > ul .cont{line-height:2.5em; position: relative;}
@@ -82,16 +90,17 @@ position: absolute; top:0; right:-0.5em;}
 
 
 .banners {position:relative;}
-.banners .cate {width:270px;}
+.banners .cate {width:270px;  position: relative;}
 .banners .banner {width:100%; position:absolute; top:0; left:30%; height:574.75px; overflow: hidden; padding: 5% 0 0 5%;  }
-.banners .cate li {padding:0.75em; font-size:1.25em; border:1px solid #ccc; border-top:0;}
-.banners .cate li > a {margin-left:1em; text-decoration:none;}
-.banners .cate li > a:hover {color:#84b736;}
-.banners .cate li .fa-angle-right {color:#aaa; float:right; padding-top:0.2em;}
+.banners .cate > li {padding:0.75em; font-size:1.25em; border:1px solid #ccc; border-top:0;}
+
+.banners .cate > li > a {margin-left:1em; text-decoration:none;}
+.banners .cate > li > a:hover {color:#84b736;}
+.banners .cate > li .fa-angle-right {color:#aaa; float:right; padding-top:0.2em;}
 
 
 .banner > li {display:none;padding-top:5%;}
-.banner .ban_img {position:absolute; width:70%; right:30%; top:20%;}
+.banner .ban_img {position:absolute; width:70%; right:30%; top:20%; z-index:1;}
 .banner .ban_tit {font-size:4em; color:#333; font-weight:bold; opacity:0; width:40%;}
 .banner .ban_stit {font-size:1.5em; color:#666; opacity:0; width:40%;}
 .banner .ban_cont {font-size:1.25em; color:#999; opacity:0; width:40%; margin-top:20px;}
@@ -101,6 +110,17 @@ position: absolute; top:0; right:-0.5em;}
 .banner .ban_price {font-size:3em; color:#4064b1; opacity:0; width:40%; margin-top:40px;}
 .banners .rt_arrow {width:40px; height:50px; position: absolute; top:calc(50% - 25px); right:-10%; font-size:2em; line-height:50px; color:#000; text-align:center; cursor:pointer;}
 .banners .rt_arrow:hover {font-size:3em;}
+.cate_panel{position:absolute; border:1px solid #ccc; width:800px; left:269px; top:-1px; z-index:20; height:491px; background-color:#fff; display:none;}
+.panel0{width:30%; float:left; padding:5%; font-size:1.25rem; margin-left:2%}
+.panel0 > li{padding:5px 0; font-size: 1rem;}
+.panel0 > li:hover{color:#4064b1;}
+.panel_img img{width:100%;}
+.panel0 > li:nth-child(1){width:100%;}
+.panel0 > li:nth-child(2){font-weight: bold;}
+.itembrand_panel {width:100%; position:absolute; bottom:0; background-color:#f1f1f1;}
+.itembrand_panel > li {float:left; width:30%; text-align:center; padding:0.5% 5%; margin-left:2%;}
+
+
 
 
 .ban_ani {animation-name:ban-ani; animation-duration:0.5s; animation-fill-mode:forwards;}

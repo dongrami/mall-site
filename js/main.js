@@ -1,12 +1,12 @@
 var config = {
-    apiKey: "AIzaSyD8HI3yR7fCwGp6jcDYS00nbCzW2IWVWR8",
-    authDomain: "dongrami-shoppingmall.firebaseapp.com",
-    databaseURL: "https://dongrami-shoppingmall.firebaseio.com",
-    projectId: "dongrami-shoppingmall",
-    storageBucket: "dongrami-shoppingmall.appspot.com",
-    messagingSenderId: "202670593803"
-  };
-  firebase.initializeApp(config);
+	apiKey: "AIzaSyD8HI3yR7fCwGp6jcDYS00nbCzW2IWVWR8",
+	authDomain: "dongrami-shoppingmall.firebaseapp.com",
+	databaseURL: "https://dongrami-shoppingmall.firebaseio.com",
+	projectId: "dongrami-shoppingmall",
+	storageBucket: "dongrami-shoppingmall.appspot.com",
+	messagingSenderId: "202670593803"
+};
+firebase.initializeApp(config);
 
 var db = firebase.database();
 var ref;
@@ -502,7 +502,7 @@ var emt = [{main : {title:"THEME ELEMENTSFEATURES", link:"", color:"", icon:""},
 
 
 
-  /***왼쪽 카테고리 패널0번***/
+/***왼쪽 카테고리 패널0번***/
 
 var item = [];
 item[0] = [];
@@ -531,95 +531,103 @@ itemBrand[0] = "../img/brand0.png";
 itemBrand[1] = "../img/brand1.png";
 itemBrand[2] = "../img/brand3.png";
 
-		/***** 왼쪽 카테고리 생성 *****/
-		var sFn = function(data) {
-			if(data.result) {
-				for(var i=0, html='', rs; i<data.result.cates.length; i++) {
-					rs = data.result.cates[i];
-					html = '<li>';
-					html+= '<span class="'+rs.icon+'"></span>';
-					html+= '<a href="'+rs.link+'"><span>'+rs.title+'</span></a>';
-					if(rs.ajax != '') {
-						html += '<span class="fa fa-angle-right"></span>';
-						html+= '<div class="cate_panel clear">';
-					/*****패널 생성-시작 *****/
-					if(i == 0) {
-						for(var j=0; j<item.length; j++){
-							html+= '<ul id="panel'+i+'" class="panel0">';
-							html+= '<li class="panel_img"><img src ="'+item[j][0]+'"></li>';
-							html+= '<li>'+item[j][1]+'</li>';
-							html+= '<li>'+item[j][2]+'</li>';
-							html+= '<li>'+item[j][3]+'</li>';
-							html+= '<li>'+item[j][4]+'</li>';
-							html+= '<li>'+item[j][5]+'</li>';
-							html+= '</ul>';
-						}
-						html+= '<ul class="itembrand_panel clear">';
-						for(var j=0; j<itemBrand.length; j++) {
-							html+= '<li><img src="'+itemBrand[j]+'" class="img w3-grayscale-max w3-opacity"></li>';
-						}
-						html+= '</ul>';
+/***** 왼쪽 카테고리 생성 *****/
+var sFn = function (data) {
+	if (data.result) {
+		for (var i = 0, html = '', rs; i < data.result.cates.length; i++) {
+			rs = data.result.cates[i];
+			html = '<li>';
+			html += '<span class="' + rs.icon + '"></span>';
+			html += '<a href="' + rs.link + '"><span>' + rs.title + '</span></a>';
+			if (rs.ajax != '') {
+				html += '<span class="fa fa-angle-right"></span>';
+				html += '<div class="cate_panel clear">';
+				/*****패널 생성-시작 *****/
+				if (i == 0) {
+					for (var j = 0; j < item.length; j++) {
+						html += '<ul id="panel' + i + '" class="panel0">';
+						html += '<li class="panel_img"><img src ="' + item[j][0] + '"></li>';
+						html += '<li>' + item[j][1] + '</li>';
+						html += '<li>' + item[j][2] + '</li>';
+						html += '<li>' + item[j][3] + '</li>';
+						html += '<li>' + item[j][4] + '</li>';
+						html += '<li>' + item[j][5] + '</li>';
+						html += '</ul>';
 					}
-					/*****패널 생성-종료 *****/
-					html+='</div>';
-				
+					html += '<ul class="itembrand_panel clear">';
+					for (var j = 0; j < itemBrand.length; j++) {
+						html += '<li><img src="' + itemBrand[j] + '" class="img w3-grayscale-max w3-opacity"></li>';
+					}
+					html += '</ul>';
 				}
-					html+= '</li>';
-					$(".banners .cate").append(html);
-				}
-				$(".cate > li").hover(function(){
-					$(this).find(".cate_panel").show();
-				}, function(){
-					$(this).find(".cate_panel").hide();
-				});
-				$(".fur_brand_panel img").hover(function(){
-					$(this).removeClass("w3-grayscale-max w3-opacity");
-				}, function(){
-					$(this).addClass("w3-grayscale-max w3-opacity");
-				});
-				}
+				/*****패널 생성-종료 *****/
+				html += '</div>';
+
 			}
-		
-		var cateAjax = new Ajax("../json/cate_left1.json");
-		//cateAjax.addData({chk:0});
-		cateAjax.send(sFn);
-		/*
-		$(".banner > li").each(function(i){
-			$(this).children("div").each(function(i){
-				$(this).css("animation-delay", i/5+"s").addClass("ban_ani");
-			});
+			html += '</li>';
+			$(".banners .cate").append(html);
+		}
+		$(".cate > li").hover(function () {
+			$(this).find(".cate_panel").show();
+		}, function () {
+			$(this).find(".cate_panel").hide();
 		});
-		*/
-		var banNow = 0;
-		$(".banners .rt_arrow").click(function(){
-			$(".banner").children("li").hide();
-			$(".banner").children("li").eq(banNow).show();
-			$(".banner").children("li").eq(banNow).children(".ban_img").addClass("img_ani");
-			$(".banner").children("li").eq(banNow).children("div").each(function(i){
-				$(this).css("animation-delay", i/5+"s").addClass("ban_ani");
-			});
-			if(banNow == 2) banNow = -1;
-			banNow++;
-		}).trigger("click");
-		
-		$(".banners").mousemove(function(evt){
-			var delta = 50;
-			var cX = evt.clientX;
-			var cY = evt.clientY;
-			var iX = $(this).find(".ban_img").width()/2;
-			var iY = $(this).find(".ban_img").height()/2;
-			var mX = (iX - cX)/delta;
-			var mY = (iY - cY)/delta;
-			$(this).find(".ban_img").css("transform", "translate("+mX+"px, "+mY+"px)");
+		$(".fur_brand_panel img").hover(function () {
+			$(this).removeClass("w3-grayscale-max w3-opacity");
+		}, function () {
+			$(this).addClass("w3-grayscale-max w3-opacity");
 		});
-		
-		$('#container').imagesLoaded()
-		  .done( function( instance ) {
-			  $(".loader").hide(0);
-			console.log('all images successfully loaded');
-		  })
-		  .progress( function( instance, image ) {
-			var result = image.isLoaded ? 'loaded' : 'broken';
-			console.log( 'image is ' + result + ' for ' + image.img.src );
-		  });
-		
+	}
+}
+
+var cateAjax = new Ajax("../json/cate_left1.json");
+//cateAjax.addData({chk:0});
+cateAjax.send(sFn);
+/*
+$(".banner > li").each(function(i){
+	$(this).children("div").each(function(i){
+		$(this).css("animation-delay", i/5+"s").addClass("ban_ani");
+	});
+});
+*/
+var banNow = 0;
+$(".banners .rt_arrow").click(function () {
+	$(".banner").children("li").hide();
+	$(".banner").children("li").eq(banNow).show();
+	$(".banner").children("li").eq(banNow).children(".ban_img").addClass("img_ani");
+	$(".banner").children("li").eq(banNow).children("div").each(function (i) {
+		$(this).css("animation-delay", i / 5 + "s").addClass("ban_ani");
+	});
+	if (banNow == 2) banNow = -1;
+	banNow++;
+}).trigger("click");
+
+$(".banners").mousemove(function (evt) {
+	var delta = 50;
+	var cX = evt.clientX;
+	var cY = evt.clientY;
+	var iX = $(this).find(".ban_img").width() / 2;
+	var iY = $(this).find(".ban_img").height() / 2;
+	var mX = (iX - cX) / delta;
+	var mY = (iY - cY) / delta;
+	$(this).find(".ban_img").css("transform", "translate(" + mX + "px, " + mY + "px)");
+});
+
+$('#container').imagesLoaded()
+	.done(function (instance) {
+		$(".loader").hide(0);
+		console.log('all images successfully loaded');
+	})
+	.progress(function (instance, image) {
+		var result = image.isLoaded ? 'loaded' : 'broken';
+		console.log('image is ' + result + ' for ' + image.img.src);
+	});
+
+	/***** Featured *****/
+$(".featured_item").hover(function(){
+	$(this).find("div").stop().animate({"bottom":0}, 200);
+	$(this).find("img").css({"animation-name":"featuredAni"});
+}, function(){
+	$(this).find("div").stop().animate({"bottom":"-2rem"}, 200);
+	$(this).find("img").css({"animation-name":"featuredAniBack"});
+});

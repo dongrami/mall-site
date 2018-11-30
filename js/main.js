@@ -631,7 +631,7 @@ $(".featured_item").hover(function(){
 	$(this).find("div").stop().animate({"bottom":"-2rem"}, 200);
 	$(this).find("img").css({"animation-name":"featuredAniBack"});
 });
-	/***** Featured porduct*****/
+/***** Featured Products *****/
 var prdNum = 0;
 $(".prd_nav > li").click(function(){
 	prdNum = $(this).index();
@@ -653,13 +653,49 @@ $(".prd_nav > li").hover(function(){
 });
 $(".prd_nav > li").eq(0).trigger("click");
 
+for(var i=0; i<7; i++) {
+	$(".prd_wrap").append($(".prd").eq(0).clone());
+}
+
 $(".prd").hover(function(){
 	$(this).children(".prd_hover").stop().fadeIn(300);
+	$(this).find(".prd_compare").find("div").stop().animate({"top":"-43px"}, 300);	
+	if($(this).find(".prd_cont")[0].offsetHeight < $(this).find(".prd_cont")[0].scrollHeight) {
+		console.log("overflow");
+		$(this).find(".prd_cont").children("div").stop().animate({"bottom":0}, 200);
+		$(this).find(".prd_cont").children("div").click(function(){
+			$(this).parent().css({"height":"auto"});
+			$(this).hide(0);
+		});
+	}
+	$(this).find(".prd_detail").children("ul").hover(function(){
+		$(this).children(":first-child").stop().animate({"margin-top":"-38px"}, 200);
+	}, function(){
+		$(this).children(":first-child").stop().animate({"margin-top":0}, 200);
+	});
 }, function(){
 	$(this).children(".prd_hover").stop().fadeOut(300);
+	$(this).find(".prd_compare").find("div").stop().animate({"top":0}, 300);
+	if($(this).find(".prd_cont")[0].offsetHeight < $(this).find(".prd_cont")[0].scrollHeight) {
+		$(this).find(".prd_cont").children("div").stop().animate({"bottom":"-20px"}, 200);
+	}
 });
 $(".prd_hover_img").hover(function(){
 	$(this).stop().animate({"opacity":1}, 200).css({"animation-name":"prdImg"});
 }, function(){
 	$(this).stop().animate({"opacity":0}, 200).css({"animation-name":"prdImgBack"});
+});
+
+$('[data-toggle="tooltip"]').tooltip(); 
+
+$.ajax({
+	url:"../json/prds.json",
+	type: "post",
+	dataType:"json",
+	success: function(data) {
+
+	},
+	error: function(xhr, status, error) {
+		console.log(xhr, status, error);
+	}
 });

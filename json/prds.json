@@ -1,0 +1,51 @@
+{
+    "best":[{
+        "img":["../img/dunk4.jpg","../img/dunk1.jpg"],
+        "title":["Slam Dunk Mr.Red-head","Slam Dunk Mr.Gorila"],
+        "cate":"Figure",
+        "price":["$44.00","$35.00"],
+        "cont":"If you are basket man you must take it. "
+    },{
+        "img":["../img/dunk6.jpg","../img/dunk5.jpg"],
+        "title":["Slam Dunk Mr.Red-head","Slam Dunk Mr.Gorila"],
+        "cate":"Figure",
+        "price":["$44.00","$35.00"],
+        "cont":"If you are basket man you must take it. "
+    },{
+        "img":["../img/cap2.jpg","../img/cap0.jpg"],
+        "title":["Sleep Animal1","Sleep Animal2"],
+        "cate":"Figure",
+        "price":"$35.00",
+        "cont":"If you are cat girl you must take it. "
+    },{
+        "img":["../img/kids0.jpg","../img/kids2.jpg"],
+        "title":["Toy story","Toy story-Buzz"],
+        "cate":"Figure",
+        "price":["$44.00","$35.00"],
+        "cont":"If you are Toy man you must take it. "
+    },{
+        "img":["../img/gundam2.jpg","../img/gundam3.jpg"],
+        "title":["Blackgundam-front","Blackgundam-back"],
+        "cate":"Gundam",
+        "price":"$44.00",
+        "cont":"If you are gundam girl you must take it. "
+    },{
+        "img":["../img/rccar0.jpg","../img/rccar3.jpg"],
+        "title":["Z-buster","Super-buster"],
+        "cate":"Figure",
+        "price":["$44.00","$35.00"],
+        "cont":"If you are car man you must take it. "
+    },{
+        "img":["../img/dron6.jpg","../img/dron3.jpg"],
+        "title":["Dron-X","Dron-Y"],
+        "cate":"Dron",
+        "price":["$44.00","$35.00"],
+        "cont":"If you are basket man you must take it. "
+    },{
+        "img":["../img/dunk6.jpg","../img/dunk5.jpg"],
+        "title":["Slam Dunk Mr.Red-head","Slam Dunk Mr.Gorila"],
+        "cate":"Figure",
+        "price":["$44.00","$35.00"],
+        "cont":"If you are basket man you must take it. "
+    }]
+}

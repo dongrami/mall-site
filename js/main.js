@@ -1,3 +1,15 @@
+$('body').imagesLoaded()
+	.done(function (instance) {
+		$(".loader").hide(0);
+		$(".prd_out_wrap").css({"height":$(".prd_wrap").eq(0).height()+"px"});
+		console.log('all images successfully loaded');
+	})
+	.progress(function (instance, image) {
+		var result = image.isLoaded ? 'loaded' : 'broken';
+		console.log('image is ' + result + ' for ' + image.img.src);
+	});
+
+
 var config = {
 	apiKey: "AIzaSyD8HI3yR7fCwGp6jcDYS00nbCzW2IWVWR8",
 	authDomain: "dongrami-shoppingmall.firebaseapp.com",
@@ -613,15 +625,6 @@ $(".banners").mousemove(function (evt) {
 	$(this).find(".ban_img").css("transform", "translate(" + mX + "px, " + mY + "px)");
 });
 
-$('#container').imagesLoaded()
-	.done(function (instance) {
-		$(".loader").hide(0);
-		console.log('all images successfully loaded');
-	})
-	.progress(function (instance, image) {
-		var result = image.isLoaded ? 'loaded' : 'broken';
-		console.log('image is ' + result + ' for ' + image.img.src);
-	});
 
 	/***** Featured *****/
 $(".featured_item").hover(function(){
@@ -633,69 +636,114 @@ $(".featured_item").hover(function(){
 });
 /***** Featured Products *****/
 var prdNum = 0;
-$(".prd_nav > li").click(function(){
-	prdNum = $(this).index();
-	$(".prd_nav > li").css({"color":"#666"});
-	$(".prd_nav div").css({"width":0});
-	$(this).css({"color":"#222"});
-	$(this).children("div").css({"width":"100%"});
-});
-$(".prd_nav > li").hover(function(){
-	if($(this).index() != prdNum) {
-		$(this).css({"color":"#222"});
-		$(this).children("div").stop().animate({"width":"100%"}, 100);
+var prds = new Ajax("../json/prds.json");
+prds.send(resultFn);
+function resultFn(data) {
+	var html = '';
+	var li;
+	var i = data.result.length;
+	for(var i=0; i<data.result.length; i++){
+		html = '<ul class="prd_wrap clear">';
+		for(var j=0; j<data.result[i].data.length; j++) {
+			li = data.result[i].data[j];
+			html+= '<li class="prd">';
+			html+= '<div class="prd_img">';
+			html+= '<img src="'+li.img[0]+'" class="img">';
+			html+= '</div>';
+			html+= '<div class="prd_tit">'+li.title[0]+'</div>';
+			html+= '<div class="prd_cate">'+li.cate+'</div>';
+			html+= '<div class="prd_price">';
+			html+= '<span>'+li.price[0]+'</span>';
+			html+= '<span>'+li.price[1]+'</span>';
+			html+= '</div>';
+			html+= '<div class="prd_hover">';
+			html+= '<div class="prd_img">';
+			html+= '<img src="'+li.img[1]+'" class="img prd_hover_img">';
+			html+= '</div>';
+			html+= '<ul>';
+			html+= '<li class="prd_tit">'+li.title[1]+'</li>';
+			html+= '<li class="prd_cate">'+li.cate+'</li>';
+			html+= '<li class="prd_price">';
+			html+= '<span>'+li.price[0]+'</span>';
+			html+= '<span>'+li.price[1]+'</span>';
+			html+= '</li>';
+			html+= '<li class="prd_cont">';
+			html+= li.cont;
+			html+= '<div><i class="fa fa-ellipsis-h"></i></div>';
+			html+= '</li>';
+			html+= '<li class="prd_detail clear">';
+			html+= '<div>';
+			html+= '<a href="#">';
+			html+= '<i class="fa fa-heart-o" aria-hidden="true"></i>';
+			html+= '</a>';
+			html+= '</div>';
+			html+= '<ul>';
+			html+= '<li>VIEW PRODUCTS</li>';
+			html+= '<li><i class="fa fa-shopping-cart"></i></li>';
+			html+= '</ul>';
+			html+= '<div>';
+			html+= '<a href="#">';
+			html+= '<i class="fa fa-search" aria-hidden="true"></i>';
+			html+= '</a>';
+			html+= '</div>';
+			html+= '</li>';
+			html+= '</ul>';
+			html+= '</div>';
+		}
+		html+= '</ul>';
+		$(".prd_out_wrap").append(html);
 	}
-},function(){
-	if($(this).index() != prdNum) {
-		$(this).css({"color":"#666"});
-		$(this).children("div").stop().animate({"width":0}, 100);
-	}
-});
-$(".prd_nav > li").eq(0).trigger("click");
-
-for(var i=0; i<7; i++) {
-	$(".prd_wrap").append($(".prd").eq(0).clone());
-}
-
-$(".prd").hover(function(){
-	$(this).children(".prd_hover").stop().fadeIn(300);
-	$(this).find(".prd_compare").find("div").stop().animate({"top":"-43px"}, 300);	
-	if($(this).find(".prd_cont")[0].offsetHeight < $(this).find(".prd_cont")[0].scrollHeight) {
-		console.log("overflow");
-		$(this).find(".prd_cont").children("div").stop().animate({"bottom":0}, 200);
-		$(this).find(".prd_cont").children("div").click(function(){
-			$(this).parent().css({"height":"auto"});
-			$(this).hide(0);
+	//생성완료된 후 이벤트 처리
+	$(".prd_nav > li").click(function(){
+		$(".prd_wrap").stop().animate({"top":"5rem", "opacity":0}, 500, function(){
+			$(this).css({"display":"none"});
 		});
-	}
-	$(this).find(".prd_detail").children("ul").hover(function(){
-		$(this).children(":first-child").stop().animate({"margin-top":"-38px"}, 200);
-	}, function(){
-		$(this).children(":first-child").stop().animate({"margin-top":0}, 200);
+		console.log(prdNum);
+		prdNum = $(this).index();
+		$(".prd_wrap").eq(prdNum).css({"display":"block"}).stop().animate({"top":0, "opacity":1}, 500);
+		$(".prd_nav > li").css({"color":"#666"});
+		$(".prd_nav div").css({"width":0});
+		$(this).css({"color":"#222"});
+		$(this).children("div").css({"width":"100%"});
+		console.log(prdNum);
+		console.log(this);
 	});
-}, function(){
-	$(this).children(".prd_hover").stop().fadeOut(300);
-	$(this).find(".prd_compare").find("div").stop().animate({"top":0}, 300);
-	if($(this).find(".prd_cont")[0].offsetHeight < $(this).find(".prd_cont")[0].scrollHeight) {
-		$(this).find(".prd_cont").children("div").stop().animate({"bottom":"-20px"}, 200);
-	}
-});
-$(".prd_hover_img").hover(function(){
-	$(this).stop().animate({"opacity":1}, 200).css({"animation-name":"prdImg"});
-}, function(){
-	$(this).stop().animate({"opacity":0}, 200).css({"animation-name":"prdImgBack"});
-});
-
-$('[data-toggle="tooltip"]').tooltip(); 
-
-$.ajax({
-	url:"../json/prds.json",
-	type: "post",
-	dataType:"json",
-	success: function(data) {
-
-	},
-	error: function(xhr, status, error) {
-		console.log(xhr, status, error);
-	}
-});
+	$(".prd_nav > li").hover(function(){
+		if($(this).index() != prdNum) {
+			$(this).css({"color":"#222"});
+			$(this).children("div").stop().animate({"width":"100%"}, 100);
+		}
+	},function(){
+		if($(this).index() != prdNum) {
+			$(this).css({"color":"#666"});
+			$(this).children("div").stop().animate({"width":0}, 100);
+		}
+	});
+	$(".prd_nav > li").eq(0).trigger("click");
+	
+	$(".prd").hover(function(){
+		$(this).children(".prd_hover").stop().fadeIn(300);	
+		if($(this).find(".prd_cont")[0].offsetHeight < $(this).find(".prd_cont")[0].scrollHeight) {
+			$(this).find(".prd_cont").children("div").stop().animate({"bottom":0}, 200);
+			$(this).find(".prd_cont").children("div").click(function(){
+				$(this).parent().css({"height":"auto"});
+				$(this).hide(0);
+			});
+		}
+		$(this).find(".prd_detail").children("ul").hover(function(){
+			$(this).children(":first-child").stop().animate({"margin-top":"-38px"}, 200);
+		}, function(){
+			$(this).children(":first-child").stop().animate({"margin-top":0}, 200);
+		});
+	}, function(){
+		$(this).children(".prd_hover").stop().fadeOut(300);
+		if($(this).find(".prd_cont")[0].offsetHeight < $(this).find(".prd_cont")[0].scrollHeight) {
+			$(this).find(".prd_cont").children("div").stop().animate({"bottom":"-20px"}, 200);
+		}
+	});
+	$(".prd_hover_img").hover(function(){
+		$(this).stop().animate({"opacity":1}, 200).css({"animation-name":"prdImg"});
+	}, function(){
+		$(this).stop().animate({"opacity":0}, 200).css({"animation-name":"prdImgBack"});
+	});
+}
